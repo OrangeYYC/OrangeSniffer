@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1284</width>
+    <height>710</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Orange Sniffer [No Devices Selected]</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow#MainWindow {
+	background-color: #EEEEF2;
+}
+QMainWindow#MainWindow::separator {
+	width: 8px;
+	height: 8px;
+}
+QMenuBar {
+	background-color: #EEEEF2;
+	padding-left: 3px;
+	padding-top: 3px;
+}
+QMenuBar::item:selected {
+	background-color: #C9DEF5;
+}
+QToolBar {
+	border: none;
+	background-color: #EEEEF2;
+}
+QStatusBar {
+	border: none;
+	background-color:#EEEEF2;
+}
+QStatusBar&gt;QLabel {
+	padding: 3px 10px 3px 10px;
+}
+QMenu {
+	background-color: #F6F6F6;
+	border: 1px solid #CCCEDB;
+}
+QMenu::indicator {
+	padding: 5px 7px 5px 7px;
+}
+QMenu::separator {
+	height: 1px;
+	background-color: #E0E3E6;
+}
+QMenu::item {
+	padding: 5px 7px 5px 7px;
+}
+QMenu::item:selected {
+	color: #000000;
+	background-color: #C9DEF5;
+}
+QMenu::item:disabled {
+	background-color: #E0E3E6;
+}
+QDockWidget 
+{
+   background-color: #F5F5F5;
+	border: none;
+}
+QDockWidget &gt; QWidget {
+	border: 1px solid #CCCEDB;
+	border-top: none;
+}
+QDockWidget::title 
+{
+	color: #FFFFFF;
+    background-color: #EEEEF2;
+    padding: 3px 6px 3px 6px;
+	border: 1px solid #CCCEDB;
+	border-bottom: none;
+}
+QDockWidget::close-button, QDockWidget::float-button {
+    border: none;
+    background: #EEEEF2;
+    icon-size: 14px;
+}
+QTabBar::tab {
+	padding: 3px 8px 3px 8px;
+	background-color: #EEEEF2;
+}
+QTabBar::tab:selected {
+	background-color: #F5F5F5;
+	border: 1px solid #CCCEDB;
+	border-top : 1px solid #F5F5F5;
+	color: #5B70C9;
+}
+QTabWidget {
+	background-color: rgb(255, 0, 0);
+	border: none;
+}</string>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>20</width>
+    <height>20</height>
+   </size>
+  </property>
+  <widget class="QWidget" name="CentralWidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="sizeGripEnabled">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QDockWidget" name="LogDockWidget">
+   <property name="floating">
+    <bool>false</bool>
+   </property>
+   <property name="features">
+    <set>QDockWidget::AllDockWidgetFeatures</set>
+   </property>
+   <property name="windowTitle">
+    <string>Sniffer Output Window</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="LogDockWidgetContent">
+    <layout class="QVBoxLayout" name="LogDockWidgetLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="leftMargin">
+      <number>1</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>1</number>
+     </property>
+     <property name="bottomMargin">
+      <number>1</number>
+     </property>
+     <item>
+      <widget class="QWidget" name="LogTitleWidget" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <layout class="QHBoxLayout" name="LogTitleLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>6</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>6</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="LogTitleLabel">
+          <property name="text">
+           <string>Sniffer Output</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="LogClearButton">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>18</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>18</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Clear</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="LogTextEdit">
+       <property name="styleSheet">
+        <string notr="true">font: 9pt &quot;Cascadia Code SemiLight&quot;;</string>
+       </property>
+       <property name="lineWrapMode">
+        <enum>QTextEdit::NoWrap</enum>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="PackageDockWidget">
+   <property name="features">
+    <set>QDockWidget::AllDockWidgetFeatures</set>
+   </property>
+   <property name="windowTitle">
+    <string>Package List Window</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="PackageDockWidgetContent">
+    <property name="styleSheet">
+     <string notr="true">QWidget#PackageDockWidgetContent {
+	background-color:#F5F5F5;
+}</string>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>3</number>
+     </property>
+     <property name="leftMargin">
+      <number>1</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>1</number>
+     </property>
+     <property name="bottomMargin">
+      <number>1</number>
+     </property>
+     <item>
+      <widget class="QWidget" name="FilterWidget" native="true">
+       <layout class="QHBoxLayout" name="FilterLayout">
+        <item>
+         <widget class="QLabel" name="FilterLabel">
+          <property name="text">
+           <string>Filter</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="FilterLineEdit"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="setFilterButton">
+          <property name="text">
+           <string>Set</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearFilterButton">
+          <property name="text">
+           <string>Clear</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="PackageTableWidget" name="packageTableWidget">
+       <property name="styleSheet">
+        <string notr="true">#packageTableWidget {
+	background-color: #F5F5F5;
+	border: none;
+}
+QHeaderView::section {
+	background-color: #F5F5F5;	
+	border: none;
+}</string>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="showGrid">
+        <bool>false</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1284</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>&amp;View</string>
+    </property>
+    <addaction name="actionPackageListWindow"/>
+    <addaction name="actionSnifferOutputWindow"/>
+   </widget>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionOpenPackages"/>
+    <addaction name="separator"/>
+    <addaction name="actionSavePackages"/>
+    <addaction name="actionClearPackages"/>
+    <addaction name="separator"/>
+    <addaction name="actionSavePackage"/>
+    <addaction name="separator"/>
+    <addaction name="actionSaveLog"/>
+    <addaction name="actionClearLog"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>&amp;Sniffe</string>
+    </property>
+    <addaction name="actionStart"/>
+    <addaction name="actionPause"/>
+    <addaction name="separator"/>
+    <addaction name="actionDevice"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionAboutOrangeSniffer"/>
+    <addaction name="actionAboutQt"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuSettings"/>
+   <addaction name="menuView"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionOpenPackages"/>
+   <addaction name="actionSavePackages"/>
+   <addaction name="actionSavePackage"/>
+   <addaction name="actionClearPackages"/>
+   <addaction name="separator"/>
+   <addaction name="actionStart"/>
+   <addaction name="actionPause"/>
+   <addaction name="actionDevice"/>
+  </widget>
+  <widget class="QDockWidget" name="DetailDockWidget">
+   <property name="windowTitle">
+    <string>Detail Window</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="DetailDockWidgetContent">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="leftMargin">
+      <number>1</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>1</number>
+     </property>
+     <property name="bottomMargin">
+      <number>1</number>
+     </property>
+     <item>
+      <widget class="DetailTreeWidget" name="PackageTreeWidget">
+       <property name="styleSheet">
+        <string notr="true">#PackageTreeWidget {
+	background-color: #F5F5F5;
+	border: none;
+}
+QHeaderView::section {
+	background-color: #F5F5F5;	
+	border: none;
+}</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+       <property name="columnCount">
+        <number>2</number>
+       </property>
+       <column>
+        <property name="text">
+         <string>Property</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Value</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <action name="actionChoose_Port">
+   <property name="text">
+    <string>Choose Port</string>
+   </property>
+  </action>
+  <action name="actionPackageListWindow">
+   <property name="text">
+    <string>Package List Window</string>
+   </property>
+  </action>
+  <action name="actionSnifferOutputWindow">
+   <property name="text">
+    <string>Sniffer Output Window</string>
+   </property>
+  </action>
+  <action name="actionDevice">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/Icons/settings.png</normaloff>:/Icons/settings.png</iconset>
+   </property>
+   <property name="text">
+    <string>Device settings</string>
+   </property>
+  </action>
+  <action name="actionStart">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/Icons/start.png</normaloff>:/Icons/start.png</iconset>
+   </property>
+   <property name="text">
+    <string>Start</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionPause">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/Icons/pause.png</normaloff>:/Icons/pause.png</iconset>
+   </property>
+   <property name="text">
+    <string>Pause</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionOpenPackages">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/Icons/open.png</normaloff>:/Icons/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionSavePackages">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/Icons/saveall.png</normaloff>:/Icons/saveall.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save all packages</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionClearPackages">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/Icons/clear.png</normaloff>:/Icons/clear.png</iconset>
+   </property>
+   <property name="text">
+    <string>Clear all packages</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="actionSaveLog">
+   <property name="text">
+    <string>Save log</string>
+   </property>
+  </action>
+  <action name="actionClearLog">
+   <property name="text">
+    <string>Clear log</string>
+   </property>
+  </action>
+  <action name="actionSavePackage">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/Icons/save.png</normaloff>:/Icons/save.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save selected package</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="actionAboutOrangeSniffer">
+   <property name="text">
+    <string>About OrangeSniffer</string>
+   </property>
+  </action>
+  <action name="actionAboutQt">
+   <property name="text">
+    <string>About Qt</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PackageTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header location="global">../WebSniffer/Widgets/packagetablewidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>DetailTreeWidget</class>
+   <extends>QTreeWidget</extends>
+   <header location="global">../WebSniffer/Widgets/detailtreewidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
