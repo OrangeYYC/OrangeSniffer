@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1284</width>
-    <height>710</height>
+    <width>1306</width>
+    <height>648</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,7 +59,8 @@ QMenu::item:selected {
 	background-color: #C9DEF5;
 }
 QMenu::item:disabled {
-	background-color: #E0E3E6;
+	color: #BBA0A0;
+	background-color: #F6F6F6;
 }
 QDockWidget 
 {
@@ -81,7 +82,10 @@ QDockWidget::title
 QDockWidget::close-button, QDockWidget::float-button {
     border: none;
     background: #EEEEF2;
-    icon-size: 14px;
+    icon-size: 10px;
+}
+QDockWidget::close-button:hover, QDockWidget::float-button:hover {
+    background:#CCCEDB ;
 }
 QTabBar::tab {
 	padding: 3px 8px 3px 8px;
@@ -93,9 +97,18 @@ QTabBar::tab:selected {
 	border-top : 1px solid #F5F5F5;
 	color: #5B70C9;
 }
+QTabBar::drawBase {
+	color: rgb(255, 0, 0);
+	background-color: rgba(0, 0, 0, 0);
+	border: none;
+}
 QTabWidget {
 	background-color: rgb(255, 0, 0);
 	border: none;
+}
+QToolTip {
+	padding: 6px 10px 6px 10px;
+	background-color: #EEEEF2;
 }</string>
   </property>
   <property name="iconSize">
@@ -272,6 +285,9 @@ QTabWidget {
         </item>
         <item>
          <widget class="QPushButton" name="setFilterButton">
+          <property name="toolTip">
+           <string>Set Filter</string>
+          </property>
           <property name="text">
            <string>Set</string>
           </property>
@@ -318,7 +334,7 @@ QHeaderView::section {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1284</width>
+     <width>1306</width>
      <height>27</height>
     </rect>
    </property>
